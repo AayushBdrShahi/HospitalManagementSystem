@@ -18,7 +18,7 @@ import doc9 from './doc9.png'
 import doc10 from './doc10.png'
 import Dermatologist from './Dermatologist.png'
 import Gastroenterologist from './Gastroenterologist.png'
-import General_physician from './General_Physicia.png'
+import General_physician from './General_Physician.png'
 import Gynecologist from './Gynecologist.png'
 import Neurologist from './Neurologist.png'
 import Eye from'./Eye.png'
@@ -56,7 +56,7 @@ export const specialityData =[
         speciality: "Neurologist",
         image:Neurologist,
     }, {
-        speciality: "Eye OPD",
+        speciality: "Eye_OPD",
         image:Eye,
     },
 
@@ -72,7 +72,7 @@ export const doctors =[
         _id:"doc1",
         name:"Dr.Michael Green",
         image: doc1,
-        speciality: 'General physcian',
+        speciality: 'General_physician',
         degree: "MBBS",
         experience: '5 years',
         about: 'Dr. Green specializes in joint replacement surgeries and sports injury management, helping patients regain mobility and lead active lives.',
@@ -164,7 +164,7 @@ export const doctors =[
         _id:"doc8",
         name: 'Dr. Ava Harris',
         image: doc8,
-        speciality: 'General physcian',
+        speciality: 'General_physician',
         degree: "MBBS",
         experience: '5 years',
         about: 'Dr. Ava specializes in joint replacement surgeries and sports injury management, helping patients regain mobility and lead active lives.',
@@ -191,8 +191,8 @@ export const doctors =[
         _id:"doc9",
         name: 'Dr. Sarah Johnson',
         image: doc9,
-        speciality: 'Eye Specialist',
-        degree: 'MD, EYE OPD',
+        speciality: 'Eye_OPD',
+        degree: 'MD, EYE_OPD',
         experience: '10 years',
         about: 'Dr.Sarah provides expert care in diagnosing and managing digestive system disorders.',
         fees:70,
