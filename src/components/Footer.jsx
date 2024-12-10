@@ -3,9 +3,9 @@ import React from 'react'
 const Footer = () => {
   return (
     <footer className='py-8'>
-    <hr className="border-gray-300 w-full border-t-2 mx-auto" style={{ width: "85%" }} />
+    <hr className="border-gray-300 w-full border-t-2 mx-auto" style={{ width: "100%" }} />
 
-        < div className='max-w-6xl mx-auto  flex flex-col gap-6'>
+   < div className='max-w-6xl mx-auto  flex flex-col gap-6'>
     {/* Fotter bottom section */}
     <div className='flex flex-col md:flex-row justify-between items-center gap-6'>
     {/* Comapany and support */}

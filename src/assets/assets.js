@@ -6,6 +6,7 @@ import verified_icon from './verified_icon.svg'
 import upload_area from './upload_area.png'
 import info_icon from './info_icon.svg'
 import cross_icon from './cross_icon.png'
+import aboutus from'./AboutUs.jpg'
 import doc1 from './doc1.png'
 import doc2 from './doc2.png'
 import doc3 from './doc3.png'
@@ -33,7 +34,10 @@ export const assets ={
     verified_icon,
     info_icon,
     upload_area,
-    cross_icon
+    cross_icon,
+    aboutus,
+    doc1,
+    doc2
 }
 
 export const specialityData =[

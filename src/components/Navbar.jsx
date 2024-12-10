@@ -17,7 +17,7 @@ const Navbar = () => {
     <ul className="hidden md:flex items-center space-x-14 list-none text-lg">
       <NavLink to="/"><li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font-semibold">Home</li></NavLink>
       <NavLink to="/doctors"><li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font- font-semibold">All Doctors</li></NavLink>
-      <NavLink to="/about">< li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font- font-semibold">About</li></NavLink>
+      <NavLink to="/about">< li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font- font-semibold">About Us</li></NavLink>
       <NavLink to="/contact"><li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font- font-semibold">Contact</li></NavLink>
       <NavLink to="/HealthPackages"><li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font- font-semibold">HealthPackages</li></NavLink>
 
