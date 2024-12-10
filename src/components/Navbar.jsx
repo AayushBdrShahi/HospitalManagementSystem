@@ -15,11 +15,11 @@ const Navbar = () => {
       <img onClick={() => navigate("/")} className="w-20 h-auto cursor-pointer" src={logo} alt="" />
 
     <ul className="hidden md:flex items-center space-x-14 list-none text-lg">
-      <NavLink to="/"><li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300">Home</li></NavLink>
-      <NavLink to="/doctors"><li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300">All Doctors</li></NavLink>
-      <NavLink to="/about">< li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300">About</li></NavLink>
-      <NavLink to="/contact"><li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300">Contact</li></NavLink>
-      <NavLink to="/HealthPackages"><li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300">HealthPackages</li></NavLink>
+      <NavLink to="/"><li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font-semibold">Home</li></NavLink>
+      <NavLink to="/doctors"><li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font- font-semibold">All Doctors</li></NavLink>
+      <NavLink to="/about">< li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font- font-semibold">About</li></NavLink>
+      <NavLink to="/contact"><li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font- font-semibold">Contact</li></NavLink>
+      <NavLink to="/HealthPackages"><li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font- font-semibold">HealthPackages</li></NavLink>
 
     </ul>
     <div className='flex items-center gap-4'>
