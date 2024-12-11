@@ -33,7 +33,7 @@ const About = () => {
             reliable platform for healthcare needs. We believe that everyone
             deserves easy access to quality healthcare, and we strive to make
             that a reality through our innovative booking system.
-          </p>
+          </p>  
         </div>
       </div>
       <br /><br />
