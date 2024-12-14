@@ -1,13 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import  logo from '../assets/logo.png'
 import  profile from '../assets/profile.png'
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { AppContext } from '../context/Appcontext';
 
 const Navbar = () => {
 
   const navigate= useNavigate();
+
+  const{token,setToken} = useContext(AppContext)
   const [showMenu, setShowMenu]= useState(false);
-  const [token,setToken ]= useState(true);
+
+  const logout = () =>{
+    setToken(falsex``)
+    localStorage.removeItem('token')
+  }
 
 
   return (
@@ -35,7 +42,7 @@ const Navbar = () => {
             <hr className="border-t-1 border-gray-500 w-full mt-2" />
             <p onClick={()=> navigate('/my-appointments')} className='hover:text-primary cursor-pointer '>My Appointments</p>
             <hr className="border-t-1 border-gray-500 w-full mt-2" />
-            <p onClick={()=> setToken(false)} className='hover:text-primary cursor-pointer '>Logout</p>
+            <p onClick={logout} className='hover:text-primary cursor-pointer '>Logout</p>
               
             </div>
           </div>

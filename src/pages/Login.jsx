@@ -1,17 +1,63 @@
 
 
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AppContext } from "../context/Appcontext";
+import axios from "axios";
+import {toast} from 'react-toastify'
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const {backendUrl,token,setToken} = useContext(AppContext)
+
+  const navigate= useNavigate()
+
   const [state, setState] = useState("Sign Up");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
 
+
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-  };
+
+  try{
+    if(state === 'Sign Up'){
+      const{data} =  await axios.post(backendUrl+'/api/user/register',{name,password,email})
+    if(data.success){
+      localStorage.setItem('token',data.token)
+      setToken(data.token)
+    }else{
+      toast.error("data.message")
+    }
+    }else{
+      const{data} =  await axios.post(backendUrl+'/api/user/login',{password,email})
+      if(data.success){
+        localStorage.setItem('token',data.token)
+        setToken(data.token)
+      }else{
+        toast.error("data.message")
+      }
+    }
+  } catch (error) {
+    // Handle the error response
+    if (error.response && error.response.data) {
+      toast.error(error.response.data.message || "An error occurred");
+    } else {
+      toast.error(error.message || "An error occurred");
+    }
+  }
+
+};
+useEffect(() => {
+  if (token) {
+    navigate("/"); 
+  }
+}, [token, navigate]);
+
+
 
   // to reset form fields
   const toggleState = (newState) => {
@@ -63,7 +109,7 @@ const Login = () => {
           />
         </div>
         {/* Role Selection */}
-        {state ==="Login" &&(
+        {/* {state ==="Login" &&(
           <div className="w-full">
             <p>Select Role</p>
             <select className="border rounded w-full p-2 mt-1 required" onChange={(e) => setRole(e.target.value)}value={role}> 
@@ -74,9 +120,9 @@ const Login = () => {
             <option value="Doctor">Doctor</option>
             </select>
           </div>
-        )}
+        )} */}
 
-        <button className="bg-primary text-white w-full py-2 rounded-md text-base">
+        <button type="submit" className="bg-primary text-white w-full py-2 rounded-md text-base">
           {state === "Sign Up" ? "Sign Up" : "Login"}
         </button>
         {state === "Sign Up" ? (
