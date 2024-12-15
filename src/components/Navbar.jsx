@@ -12,7 +12,7 @@ const Navbar = () => {
   const [showMenu, setShowMenu]= useState(false);
 
   const logout = () =>{
-    setToken(falsex``)
+    setToken(false)
     localStorage.removeItem('token')
   }
 

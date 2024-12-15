@@ -11,6 +11,8 @@ import Appointment from './pages/Appointment'
 import HealthPackages from './pages/HealthPackages'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
@@ -30,6 +32,7 @@ const App = () => {
         <Route path ='/HealthPackages' element={<HealthPackages/>}/>
       </Routes>
       <Footer/>
+      <ToastContainer/>
     </div>
   )
 }
