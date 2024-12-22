@@ -2,13 +2,13 @@ import React, { useContext, useState } from 'react'
 import  logo from '../assets/logo.png'
 import  profile from '../assets/profile.png'
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { AppContext } from '../context/Appcontext';
+import { useAppContext } from '../context/Appcontext';
 
 const Navbar = () => {
 
   const navigate= useNavigate();
 
-  const{token,setToken} = useContext(AppContext)
+  const{token,setToken} = useAppContext()
   const [showMenu, setShowMenu]= useState(false);
 
   const logout = () =>{

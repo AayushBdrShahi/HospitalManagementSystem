@@ -1,14 +1,14 @@
 
 
 import React, { useContext, useEffect, useState } from "react";
-import { AppContext } from "../context/Appcontext";
+import { useAppContext} from "../context/Appcontext.jsx";
 import axios from "axios";
 import {toast} from 'react-toastify'
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
-  const {backendUrl,token,setToken} = useContext(AppContext)
+  const {backendUrl,token,setToken} = useAppContext()
 
   const navigate= useNavigate()
 

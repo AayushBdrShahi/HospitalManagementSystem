@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaUserMd, FaFemale, FaBrain, FaStethoscope, FaChild, FaHeartbeat, FaEye } from 'react-icons/fa';
-import { AppContext } from "../context/Appcontext";
+import { useAppContext } from "../context/Appcontext";
 
 
 const Doctors = () => {
@@ -9,7 +9,7 @@ const Doctors = () => {
   const [filterDoc, setFilterDoc] = useState([]);
   const navigate = useNavigate();
   
-  const {doctors} = useContext(AppContext);
+  const {doctors} = useAppContext();
 
 
   const applyFilter = ()=>{
