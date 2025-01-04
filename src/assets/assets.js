@@ -143,7 +143,7 @@ export const doctors =[
         name: 'Dr. Olivia Johnson',
         image: doc6,
         speciality: 'Dermatologist',
-        speciality: 'Dermatologist',
+        degree: 'Dermatologist',
         experience: '6 Years',
         about: 'Dr.Johnson is passionate about skincare and helps patients with a range of conditions, from acne to chronic skin disorders, with advanced treatments.',
         fees:55,
