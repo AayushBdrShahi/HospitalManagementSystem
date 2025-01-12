@@ -1,14 +1,13 @@
 import React, { useContext, useState } from "react";
 import logo from "../assets/logo.png";
-import profile from "../assets/profile.png";
+import profile from "../assets/profile.png"; // Fallback image
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/Appcontext";
 import { assets } from "../assets/assets";
 
 const Navbar = () => {
   const navigate = useNavigate();
-
-  const { token, setToken } = useAppContext();
+  const { token, setToken, userData } = useAppContext(); 
   const [showMenu, setShowMenu] = useState(false);
 
   const logout = () => {
@@ -17,12 +16,12 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex items-center justify-between text-sm py-4 mb-5 border-b border-b-gray-400 shadow-sm ">
+    <div className="flex items-center justify-between text-sm py-4 mb-5 border-b border-b-gray-400 shadow-sm">
       <img
         onClick={() => navigate("/")}
         className="w-20 h-auto cursor-pointer"
         src={logo}
-        alt=""
+        alt="Logo"
       />
 
       <ul className="hidden md:flex items-center space-x-14 list-none text-lg">
@@ -32,50 +31,54 @@ const Navbar = () => {
           </li>
         </NavLink>
         <NavLink to="/doctors">
-          <li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font- font-semibold">
+          <li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font-semibold">
             All Doctors
           </li>
         </NavLink>
         <NavLink to="/about">
-          <li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font- font-semibold">
+          <li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font-semibold">
             About Us
           </li>
         </NavLink>
         <NavLink to="/contact">
-          <li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font- font-semibold">
+          <li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font-semibold">
             Contact
           </li>
         </NavLink>
         <NavLink to="/HealthPackages">
-          <li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font- font-semibold">
-            HealthPackages
+          <li className="py-1 hover:text-primary transform hover:scale-x-110 duration-300 font-semibold">
+            Health Packages
           </li>
         </NavLink>
       </ul>
+
       <div className="flex items-center gap-4">
         {token ? (
           <div className="flex items-center gap-2 cursor-pointer group relative">
-            <img className="w-10 rounded-full" src={profile} alt="" />
-
+            <img
+              className="w-10 rounded-full"
+              src={userData?.image || profile} 
+              alt="Profile"
+            />
             <div className="absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block">
-              <div className="min-w-48 bg-stone-100 rounded  flex flex-col gap-4  p-4">
+              <div className="min-w-48 bg-stone-100 rounded flex flex-col gap-4 p-4">
                 <p
                   onClick={() => navigate("/my-profile")}
-                  className="hover:text-primary cursor-pointer "
+                  className="hover:text-primary cursor-pointer"
                 >
                   My Profile
                 </p>
                 <hr className="border-t-1 border-gray-500 w-full mt-2" />
                 <p
                   onClick={() => navigate("/my-appointments")}
-                  className="hover:text-primary cursor-pointer "
+                  className="hover:text-primary cursor-pointer"
                 >
                   My Appointments
                 </p>
                 <hr className="border-t-1 border-gray-500 w-full mt-2" />
                 <p
                   onClick={logout}
-                  className="hover:text-primary cursor-pointer "
+                  className="hover:text-primary cursor-pointer"
                 >
                   Logout
                 </p>
@@ -90,6 +93,7 @@ const Navbar = () => {
             Login
           </button>
         )}
+
         <img
           onClick={() => setShowMenu(true)}
           className="w-6 md:hidden cursor-pointer"
@@ -97,7 +101,7 @@ const Navbar = () => {
           alt="Menu Icon"
         />
 
-        {/* Mobile menu */}
+        {/* Mobile Menu */}
         <div
           className={`${
             showMenu ? "fixed w-full h-full" : "hidden"
@@ -140,7 +144,6 @@ const Navbar = () => {
             >
               Contact
             </NavLink>
-
             <NavLink
               to="/HealthPackages"
               onClick={() => setShowMenu(false)}

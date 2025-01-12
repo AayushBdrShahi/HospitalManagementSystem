@@ -13,18 +13,19 @@ export const AppContextProvider = ({ children }) => {
   );
   const [userData, setUserData] = useState(false);
 
+  // Load user profile data
   const loadUserProfileData = async () => {
     try {
       const { data } = await axios.get(backendUrl + "/api/user/get-profile", {
         headers: { token },
       });
       if (data.success) {
-        setUserData(data.userData);
+        setUserData(data.userData); 
       } else {
         toast.error(data.message || "Failed to load user data.");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error(error.message);
     }
   };
@@ -62,6 +63,7 @@ export const AppContextProvider = ({ children }) => {
         userData,
         setUserData,
         loadUserProfileData,
+        getDoctorsData,
       }}
     >
       {children}

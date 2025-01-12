@@ -11,27 +11,32 @@ const Doctors = () => {
   
   const {doctors} = useAppContext();
 
-
-  const applyFilter = ()=>{
-
-    if(speciality){
-      setFilterDoc(doctors.filter(doc => doc.speciality === speciality))
-    }else{
+  const applyFilter = () => {
+    if (speciality) {
+      setFilterDoc(
+        doctors.filter(
+          (doc) =>
+            doc.speciality.toLowerCase().replace(" ", "_") ===
+            speciality.toLowerCase()
+        )
+      );
+    } else {
       setFilterDoc(doctors);
     }
-  }
-  useEffect(()=>{
+  };
+  useEffect(() => {
+    console.log("Speciality from URL:", speciality);
+    console.log("Doctors:", doctors);
     applyFilter();
-  },[doctors,speciality])
-
-
+  }, [doctors, speciality]);
+    
   return (
     <div>
       <p className="text-black font-bold">Suggestions</p>
       <div className="flex flex-col sm:flex-row items-start gap-4 mt-5">
         <div className="flex flex-col font-semibold text-sm space-y-4 text-black">
 
-        <p onClick={() =>speciality === "General physcian"? navigate("/doctors"): navigate("/doctors/General_physician")}
+        <p onClick={() =>speciality === "General_physician"? navigate("/doctors"): navigate("/doctors/General_physician")}
             className={`flex items-center w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
               speciality === "General_Physician" ? "bg-indigo-100 text-black" : ""}`}>
             <FaStethoscope className="mr-2 text-2xl text-blue-500" /> General Physician

@@ -29,9 +29,9 @@ const MyProfile = () => {
   
       if (data.success) {
         toast.success(data.message || "Profile Updated Successfully");
-        await loadUserProfileData(); 
-        setIsEdit(false); 
-        setImage(false); 
+        await loadUserProfileData(); // Updates the userData in context
+        setIsEdit(false);
+        setImage(false);
       } else {
         toast.error(data.message || "Failed to update profile");
       }

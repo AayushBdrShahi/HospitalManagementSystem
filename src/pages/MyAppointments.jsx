@@ -1,8 +1,34 @@
 import React from 'react';
 import { useAppContext } from '../context/Appcontext';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const MyAppointments = () => {
-  const { doctors } = useAppContext();
+  const { backendUrl, token } = useAppContext();
+  
+  const [appointments, setAppointments] = useState([])
+
+const getUserAppointments = async()=>{
+  try {
+    const {data} = await axios.get(backendUrl + '/api/user/appointments',{headers:{token}})
+    if(data.success){
+      setAppointments(data.appointments.reverse())
+      console.log(data.appointments)
+    }
+    
+  } catch (error) {
+    console.log(error);
+    toast.error(error.message)
+  }
+}
+
+useEffect(() => {
+   if(token){
+    getUserAppointments()
+   }
+}, [token])
+
 
   return (
     <div className="max-w-5xl mx-auto p-6">
@@ -10,7 +36,7 @@ const MyAppointments = () => {
         My Appointments
       </h2>
       <div className="space-y-10">
-        {doctors.slice(0, 3).map((item, index) => (
+        {appointments.map((item, index) => (
           <div
             key={index}
             className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow p-8 flex flex-col lg:flex-row items-center justify-between"
@@ -19,25 +45,25 @@ const MyAppointments = () => {
             <div className="flex-shrink-0 mb-6 lg:mb-0">
               <img
                 className="w-36 h-36 object-cover rounded-xl border-2"
-                src={item.image}
+                src={item.docData.image}
                 alt={item.name}
               />
             </div>
 
             {/* Appointment Details */}
             <div className="flex-1 lg:ml-8">
-              <p className="text-xl font-bold text-gray-800">{item.name}</p>
+              <p className="text-xl font-bold text-gray-800">{item.docData.name}</p>
               <p className="text-md text-gray-600 mt-2">
-                <span className="font-medium">Speciality:</span> {item.speciality}
+                <span className="font-medium">Speciality:</span> {item.docData.speciality}
               </p>
               <p className="text-md text-gray-600 mt-2">
-                <span className="font-medium">Experience:</span> {item.experience} years
+                <span className="font-medium">Experience:</span> {item.docData.experience} years
               </p>
               <p className="text-md text-gray-600 mt-2">
-                <span className="font-medium">Fees:</span> ${item.fees}
+                <span className="font-medium">Fees:</span> ${item.docData.fees}
               </p>
               <p className="text-md text-gray-600 mt-4">
-                <span className="font-medium">Date & Time:</span> 25, July, 2024 | 8:30 PM
+                <span className="font-medium">Date & Time:</span> {item.slotDate}|{item.slotTime}
               </p>
             </div>
 
