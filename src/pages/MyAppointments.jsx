@@ -6,7 +6,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const MyAppointments = () => {
-  const { backendUrl, token } = useAppContext();
+  const { backendUrl, token,getDoctorsData  } = useAppContext();
   
   const [appointments, setAppointments] = useState([])
 
@@ -31,6 +31,7 @@ const getUserAppointments = async()=>{
 //   if(data.success){
 //     toast.success(data.message)
 //     getUserAppointments()
+//     getDoctorsData()
 //   }
 //   else{
 //     toast.error(data.message)
@@ -46,6 +47,7 @@ const getUserAppointments = async()=>{
 
 const cancelAppointment = async (appointmentId) => {
   try {
+    console.log("Cancelling Appointment ID:", appointmentId);
     const { data } = await axios.post(
       backendUrl + '/api/user/cancel-appointment',
       { appointmentId },
@@ -59,14 +61,20 @@ const cancelAppointment = async (appointmentId) => {
       setAppointments((prevAppointments) =>
         prevAppointments.filter((appointment) => appointment._id !== appointmentId)
       );
+
+      console.log("Updated Appointments:", appointments);
+
+      // Fetch updated doctors' data
+      getDoctorsData();
     } else {
       toast.error(data.message);
     }
   } catch (error) {
-    console.log(error);
+    console.log("Error cancelling appointment:", error);
     toast.error(error.message);
   }
 };
+
 
 useEffect(() => {
    if(token){
