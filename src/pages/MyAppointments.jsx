@@ -62,7 +62,6 @@ const cancelAppointment = async (appointmentId) => {
         prevAppointments.filter((appointment) => appointment._id !== appointmentId)
       );
 
-      console.log("Updated Appointments:", appointments);
 
       // Fetch updated doctors' data
       getDoctorsData();
