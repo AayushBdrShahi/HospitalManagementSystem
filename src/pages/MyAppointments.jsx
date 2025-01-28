@@ -24,25 +24,6 @@ const getUserAppointments = async()=>{
   }
 }
 
-// const cancelAppointment =  async(appointmentId)=>{
-// try{
-
-//   const { data} = await axios.post(backendUrl + '/api/user/cancel-appointment',{appointmentId},{headers:{token}})
-//   if(data.success){
-//     toast.success(data.message)
-//     getUserAppointments()
-//     getDoctorsData()
-//   }
-//   else{
-//     toast.error(data.message)
-//   }
-
-// }catch(error){
-//   console.log(error);
-//     toast.error(error.message)
-// }
-
-// }
 
 
 const cancelAppointment = async (appointmentId) => {
@@ -74,12 +55,56 @@ const cancelAppointment = async (appointmentId) => {
   }
 };
 
+  
 
 useEffect(() => {
    if(token){
     getUserAppointments()
    }
 }, [token])
+
+
+
+const handlePayment = async () => {
+  const body = JSON.stringify({
+    "return_url": "http://example.com/",
+    "website_url": "http://localhost:5173/",
+    "amount": "1000",
+    "purchase_order_id": "Order01",
+    "purchase_order_name": "test",
+    "customer_info": {
+      "name": "Ram Bahadur",
+      "email": "test@khalti.com",
+      "phone": "9800000001"
+    }
+  })
+
+  try {
+    const response =  await axios.post(
+      backendUrl + '/api/user/khalti-payment',{body},{headers:{token}})
+
+    
+
+      if(response.status !==200){
+        throw new Error('Payment intitiation failed!')
+    }
+    const responseData = response.data?.data;
+    const {payment_url} = responseData || {}
+     
+    if(!payment_url) {
+        throw new Error("Payment url not received!!")
+    }
+     
+    window.location.href = payment_url
+  } catch (error) {
+    console.error("Payment error:", error);
+    alert("Payment initiation failed. Please try again.");
+  } 
+};
+
+
+
+
 
 
   return (
@@ -121,7 +146,7 @@ useEffect(() => {
 
             {/* Action Buttons */}
             <div className="flex flex-col space-y-4 lg:ml-8">
-              <button className="bg-indigo-600 text-white text-md px-6 py-3 rounded-lg hover:bg-indigo-500 transition-all shadow-lg">
+              <button onClick={handlePayment} className="bg-indigo-600 text-white text-md px-6 py-3 rounded-lg hover:bg-indigo-500 transition-all shadow-lg">
                 Pay Online
               </button>
               <button onClick={()=> cancelAppointment(item._id)} className="bg-red-500 text-white text-md px-6 py-3 rounded-lg hover:bg-red-400 transition-all shadow-lg">
