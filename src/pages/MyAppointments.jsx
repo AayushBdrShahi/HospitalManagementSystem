@@ -64,11 +64,10 @@ useEffect(() => {
 }, [token])
 
 
-
 const handlePayment = async () => {
   const body = JSON.stringify({
     "return_url": "http://example.com/",
-    "website_url": "http://localhost:5173/",
+    "website_url": "https://example.com/",
     "amount": "1000",
     "purchase_order_id": "Order01",
     "purchase_order_name": "test",
@@ -99,8 +98,13 @@ const handlePayment = async () => {
   } catch (error) {
     console.error("Payment error:", error);
     alert("Payment initiation failed. Please try again.");
-  } 
+  } finally {
+    
+  }
 };
+
+
+
 
 
 
