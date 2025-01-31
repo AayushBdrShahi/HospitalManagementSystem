@@ -36,6 +36,7 @@ const cancelAppointment = async (appointmentId) => {
     );
 
     if (data.success) {
+      alert("You sure want to cancel")
       toast.success(data.message);
 
       // Remove the canceled appointment from the state
