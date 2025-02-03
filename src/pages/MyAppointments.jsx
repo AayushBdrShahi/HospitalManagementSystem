@@ -67,7 +67,7 @@ useEffect(() => {
 
 const handlePayment = async () => {
   const body = JSON.stringify({
-    "return_url": "http://example.com/",
+    "return_url": "https://test-pay.khalti.com/mobank/5eG3gcntGq4tjBfnjUd35j?pidx=k6KV8oAZHwRSP3dVN3rJoA",
     "website_url": "https://example.com/",
     "amount": "1000",
     "purchase_order_id": "Order01",
