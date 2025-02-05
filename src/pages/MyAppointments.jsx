@@ -63,42 +63,89 @@ const MyAppointments = () => {
     }
   }, [token]);
 
-  const handlePayment = async (doctorName, doctorFees) => {
-    const body = JSON.stringify({
+  // const handlePayment = async (doctorName, doctorFees) => {
+  //   const body = JSON.stringify({
+  //     return_url: "http://localhost:5173/Payment",
+  //     website_url: "http://localhost:5173/",
+  //     amount: doctorFees * 100, // Assuming the amount needs to be in cents/paise
+  //     purchase_order_id: "Order01",
+  //     purchase_order_name: doctorName,
+  //     customer_info: {
+  //       name: doctorName,
+  //     },
+  //   });
+
+  //   try {
+  //     const response = await axios.post(
+  //       backendUrl + "/api/user/khalti-payment",
+  //       { body },
+  //       { headers: { token } }
+  //     );
+
+  //     if (response.status !== 200) {
+  //       throw new Error("Payment initiation failed!");
+  //     }
+
+  //     const responseData = response.data?.data;
+  //     const { payment_url } = responseData || {};
+
+  //     if (!payment_url) {
+  //       throw new Error("Payment URL not received!!");
+  //     }
+
+  //     window.location.href = payment_url;
+  //   } catch (error) {
+  //     console.error("Payment error:", error);
+  //     alert("Payment initiation failed. Please try again.");
+  //   }
+  // };
+
+
+  const handlePayment = async (appointmentId, doctorName, doctorFees) => {
+    if (!appointmentId || !doctorFees) {
+      alert("Invalid payment details. Please try again.");
+      return;
+    }
+  
+    const body = {
       return_url: "http://localhost:5173/Payment",
       website_url: "http://localhost:5173/",
-      amount: doctorFees * 100, // Assuming the amount needs to be in cents/paise
-      purchase_order_id: "Order01",
+      amount: doctorFees * 100, // Convert to cents
+      purchase_order_id: appointmentId, // Ensure appointment ID is sent correctly
       purchase_order_name: doctorName,
       customer_info: {
         name: doctorName,
       },
-    });
-
+    };
+  
     try {
       const response = await axios.post(
         backendUrl + "/api/user/khalti-payment",
-        { body },
-        { headers: { token } }
+        body, // Send JSON directly, not as a nested object
+        { headers: { token, "Content-Type": "application/json" } }
       );
-
+  
       if (response.status !== 200) {
         throw new Error("Payment initiation failed!");
       }
-
+  
       const responseData = response.data?.data;
       const { payment_url } = responseData || {};
-
+  
       if (!payment_url) {
         throw new Error("Payment URL not received!!");
       }
-
+  
       window.location.href = payment_url;
     } catch (error) {
-      console.error("Payment error:", error);
+      console.error(" Payment error:", error);
       alert("Payment initiation failed. Please try again.");
     }
   };
+  
+
+  
+ 
 
   return (
     <div className="max-w-5xl mx-auto p-6">
@@ -143,8 +190,8 @@ const MyAppointments = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col space-y-4 lg:ml-8">
-              <button
+             {/* <div className="flex flex-col space-y-4 lg:ml-8"> */}
+          {/* <button
                 onClick={() =>
                   handlePayment(item.docData.name, item.docData.fees)
                 }
@@ -152,14 +199,60 @@ const MyAppointments = () => {
               >
                 Pay Online
               </button>
+                */}
+                {/* <button
+  onClick={() =>
+    handlePayment(item._id, item.docData.name, item.docData.fees)
+  }
+  className="bg-indigo-600 text-white text-md px-6 py-3 rounded-lg hover:bg-indigo-500 transition-all shadow-lg"
+>
+  Pay Online
+</button> */}
 
-              <button
+              
+              {/* <button
                 onClick={() => cancelAppointment(item._id)}
                 className="bg-red-500 text-white text-md px-6 py-3 rounded-lg hover:bg-red-400 transition-all shadow-lg"
               >
                 Cancel Appointment
-              </button>
-            </div>
+              </button> */}
+            {/* </div>  */}
+
+
+            {/* Action Buttons */}
+<div className="flex flex-col space-y-4 lg:ml-8">
+  {item.payment ? (
+    // Show "Paid" button if payment is true
+    <button
+      className="bg-green-400 text-white text-md px-6 py-3 rounded-lg shadow-lg cursor-default"
+      disabled
+    >
+      Paid
+    </button>
+  ) : (
+    <>
+      {/* Show "Pay Online" and "Cancel Appointment" buttons only if payment is false */}
+      <button
+        onClick={() =>
+          handlePayment(item._id, item.docData.name, item.docData.fees)
+        }
+        className="bg-indigo-600 text-white text-md px-6 py-3 rounded-lg hover:bg-indigo-500 transition-all shadow-lg"
+      >
+        Pay Online
+      </button>
+
+      <button
+        onClick={() => cancelAppointment(item._id)}
+        className="bg-red-500 text-white text-md px-6 py-3 rounded-lg hover:bg-red-400 transition-all shadow-lg"
+      >
+        Cancel Appointment
+      </button>
+    </>
+  )}
+</div>
+
+          
+
           </div>
         ))}
       </div>
